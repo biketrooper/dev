@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Basic Scene with Environment - A-Frame</title>
+    <meta name="description" content="Basic Scene with Environment - A-Frame">
+    <!-- <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script> -->
+    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+    <script src="aframe-ar.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.0.0/dist/aframe-environment-component.min.js"></script>
+<script src="https://unpkg.com/aframe-text-geometry-component@0.5.1/dist/aframe-text-geometry-component.min.js"></script>
+  </head>
+  <body>
+    <!-- Try changing the preset to one of default, contact, egypt, checkerboard, forest, goaland, yavapai, goldmine, 
+         threetowers, poison, arches, tron, japan, dream, volcano, starry, osiris. -->
+    <!-- See more environment options: https://github.com/feiss/aframe-environment-component#parameters -->
+    <a-scene embedded arjs='sourceType: webcam;'>
+
+      <a-assets>
+        <a-asset-item id="lego-model" src="lego.obj"/>
+        <a-asset-item id="chair-model" src="source/CADEIRA_UV_ABERTA.obj"/>
+        <a-asset-item id="house-model" src="247_House 15_obj.obj"/>
+        <a-asset-item id="car-model" src="Low_Poly_City_Cars.obj"/>
+
+
+      </a-assets>
+
+    <a-entity position="0 -1 -.2" rotation="-92 0 0">
+
+      <a-entity position="-1 0 0">
+        <a-box color="#e78821" rotation="" visible="" geometry="" material="opacity: 1;" scale=".7 .2 .2" position=".7 0.7 0.7"></a-box>
+        <a-entity color="#e78821" visible="" rotation="90 0 -90" material="opacity: 1; color:#e78821;" scale=".4 .4 .4" position="1.2 0.7 0.7" geometry="primitive: cone; radiusBottom: .5; radiusTop: 0.01"></a-entity>
+      </a-entity>
+
+    	<a-text value="asterisco" rotation="0 0 0" color="#FFF" position="-0.4 1.4 .5" scale="1 1 1"></a-text>
+    	<a-text value="WEBCOM!" rotation="0 0 0" color="#e78821" position="-0.4 1.2 .5" scale="1 1 1"></a-text>
+
+      <a-box move-around="moveZ: 0.02" position='0 0.5 0.4' material='opacity: 0.9;' color="#006699" scale="2.2 .5 .4"></a-box>
+      <a-entity  move-around="moveZ: 0.02" rotation="-5 0 0" scale=".5 .5 .5" visible="" position="-1.5 0.7 1.3">
+        <a-entity text-geometry="value: CELEPAR; style: italic; bevelEnabled: true; bevelSize: 0.0; bevelThickness: 0.03; size: 0.7; weight: bold; height: 0;" material="shader: flat; color: #FFFFFF" rotation="" scale="" visible="" position="1 -1 -0.3"></a-entity>
+      </a-entity>
+
+
+      
+      <!-- <a-curvedimage material="" geometry="" scale=".5 .5 .5" visible="" position="-0.2 0 -1" rotation="-200 240 -40" color="#e58022"></a-curvedimage> -->
+      
+      <a-gltf-model src="model.gltf" scale="2 2 2" position="-0.6 -2.4 -1.3"></a-gltf-model>
+      <a-obj-model src="#lego-model" material="color: #f1b71b" position="1 0 0" scale="0.02 0.02 0.02"></a-obj-model>
+      <a-obj-model src="#chair-model" rotation="2 0 0" material="color: #e78821" position="-1.4 0 -2" scale="0.12 0.12 0.12" visible="" obj-model=""></a-obj-model>
+      <a-obj-model src="#house-model" rotation="0 0 0" material="color: #606060" visible="" obj-model="" position="0 -1.5 -5" scale="0.007 0.007 0.007"></a-obj-model>
+<!--       <a-obj-model src="#car-model" rotation="0 0 0" material="color: #FFF" visible="" obj-model="" position="0 0.1 -5" scale="0.007 0.007 0.007"></a-obj-model> -->
+
+  <a-plane rotation="-90 0 0" scale="" visible="" material="" geometry="" position="0 0 -2" width="3.8" height="5" color="#1690c5"></a-plane>
+</a-entity>
+      
+  <!-- <a-marker-camera type='pattern' url='lock-pattern-marker.patt'></a-marker> -->
+       <a-marker-camera preset='kanji'></a-marker-camera>
+    </a-scene>
+    <script >
+      AFRAME.registerComponent('move-around', {
+  schema: {
+    moveX: { type: 'number', default: 0 },
+    moveY: { type: 'number', default: 0 },
+    moveZ: { type: 'number', default: 0 }
+  },
+  init: function init() {
+    this.counter = 0;
+    this.originalPosition = this.el.getAttribute('position');
+  },
+  tick: function tick(time, timeDelta) {
+    this.counter += 0.001 * timeDelta;
+
+    var _originalPosition = this.originalPosition,
+        x = _originalPosition.x,
+        y = _originalPosition.y,
+        z = _originalPosition.z;
+
+
+    var newX = x + this.data.moveX * Math.cos(this.counter);
+    var newY = y + this.data.moveY * Math.cos(this.counter);
+    var newZ = z + this.data.moveZ * Math.cos(this.counter);
+
+    this.el.setAttribute('position', { x: newX, y: newY, z: newZ });
+  }
+});
+//# sourceURL=pen.js
+</script>
+  </body>
+</html>
