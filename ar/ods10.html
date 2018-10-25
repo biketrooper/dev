@@ -44,7 +44,7 @@
 </head>
 <body>
   <!--  <a-scene embedded arjs="sourceType: webcam;"> -->
-  <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
+  <a-scene embedded arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false;">
       <a-assets>
         <img id="map2" src="ods-6.png">
         <img id="map2b" src="ods-6b.png">
@@ -52,7 +52,7 @@
         <img id="map2d" src="ods-6d.png">
       </a-assets>
 
-      <a-entity rotation="-90 0 0" position="0 -1 0" scale="1 1 1">
+      <a-entity id="target" rotation="-90 0 0" position="0 -1 0" scale="1 1 1">
         <a-entity rotation="" scale="" visible="" position="0 0 0">
             <a-image src="#map2" rotation="" position="0 -0.1 0" visible="" material="" geometry="" scale="1.2 1.5 1.2">
               <a-animation begin="12200" dur="2600" direction="elastic" repeat="0" attribute="rotation" from="0 0 0" to="0 -60 0"></a-animation>
@@ -136,11 +136,13 @@
       <a-marker-camera preset='kanji'></a-marker-camera>
     </a-scene>
   <script>
-       /* var targetEl = document.querySelector('#target');
+       //var targetEl = document.querySelector('#target');
+       var targetEl = document.getElementById('target');
           targetEl.addEventListener('click', function() {
-            targetEl.setAttribute('material', {color: 'red'});
-            targetEl.setAttribute('material', {color: 'red'});
-          });*/
+            alert('aaa');
+            /*targetEl.setAttribute('material', {color: 'red'});
+            targetEl.setAttribute('material', {color: 'red'});*/
+          });
   </script>
 </body>
 </html>
