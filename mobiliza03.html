@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Mz03</title>
+    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+  <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
+    <script src="https://unpkg.com/aframe-text-geometry-component@0.5.1/dist/aframe-text-geometry-component.min.js"></script>
+    <script src="aframe-mouse-cursor-component.min.js"></script>
+    <script>
+      AFRAME.registerComponent('handle-events', {
+        init: function () {
+          var el = this.el;  // <a-box>
+          el.addEventListener('mouseenter', function () {
+            el.setAttribute('color', '#24CAFF');  
+          });
+          el.addEventListener('mouseleave', function () {
+            el.setAttribute('color', '#EF2D5E');  
+          });
+          el.addEventListener('click', function () {
+            el.setAttribute('scale', {x: 2, y: 1, z: 2});
+          });
+        } 
+      });
+      AFRAME.registerComponent('target', {
+        init: function () {
+          var el = this.el;  // <a-box>
+          el.addEventListener('mouseenter', function () {
+            el.setAttribute('scale', {x: 1, y: 1, z: 2});
+            el.setAttribute('rotation', {x: 0, y: 0, z: 0});  
+          });
+          el.addEventListener('mouseleave', function () {
+            el.setAttribute('rotation', {x: 0, y: 0, z: 0});  
+          });
+        }
+      });
+    </script>
+  </head>
+  <body>
+  <a-scene embedded arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false;">
+      <a-assets>
+        <img id="map2" src="g7852-53.png">
+        <img id="map2b" src="ods-6b.png">
+        <img id="map2c" src="ods-6c.png">
+        <img id="map2d" src="ods-6d.png">
+      </a-assets>
+
+      <a-entity id="target" rotation="-90 0 0" position="0 1.2 0" scale="2 2 2" target>
+        <a-image src="#map2" rotation="" position="0 0 0" visible="" material="" geometry="" scale="1 1.45 1"></a-image>
+      </a-entity>
+
+     <!--  <a-entity id="target2" rotation="0 0 0" position="0 3 -3" scale="1 1 1" target2>
+        <a-image src="#map2b" rotation="" position="0 0 0" visible="" material="" geometry="" scale="1.2 1.5 1.2">
+          <a-animation attribute="scale" begin="mouseenter" dur="500" to="2 2 2"></a-animation>
+          <a-animation attribute="scale" begin="mouseleave" dur="500" to="1 1 1"></a-animation>
+        </a-image>
+      </a-entity>
+
+      <a-entity id="target3" rotation="0 0 0" position="-2 1 -3" scale="1 1 1" target2>
+        <a-image src="#map2c" rotation="" position="0 0 0" visible="" material="" geometry="" scale="1.2 1.5 1.2">
+          <a-animation attribute="scale" begin="touchstart" dur="500" to="2 2 2"></a-animation>
+          <a-animation attribute="scale" begin="touchend" dur="500" to="1 1 1"></a-animation>
+        </a-image>
+      </a-entity>
+
+      <a-entity id="target4" rotation="0 0 0" position="2 1 -3" scale="1 1 1" target2>
+        <a-image src="#map2d" rotation="" position="0 0 0" visible="" material="" geometry="" scale="1.2 1.5 1.2">
+          <a-animation attribute="scale" begin="touchstart" dur="500" to="2 2 2"></a-animation>
+          <a-animation attribute="scale" begin="touchend" dur="500" to="1 1 1"></a-animation>
+        </a-image>
+      </a-entity> -->
+
+      <!-- <a-box color="#EF2D5E" position="0 1 -2" handle-events></a-box>
+       -->
+      <!-- <a-camera><a-cursor></a-cursor></a-camera>
+      <a-sky color="#333"></a-sky> -->
+      <!-- <a-plane color="#000" rotation="-90 0 0" width="500" height="500"></a-plane> -->
+
+
+      <a-marker-camera preset='kanji'></a-marker-camera>
+    </a-scene>
+  </body>
+</html>
