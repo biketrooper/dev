@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Hello!</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+    <!-- AR.js by @jerome_etienne - github: https://github.com/jeromeetienne/ar.js - info: https://medium.com/arjs/augmented-reality-in-10-lines-of-html-4e193ea9fdbf -->
+    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.0/aframe/build/aframe-ar.js"></script>
+    <!-- import the webpage's javascript file -->
+    <script>
+       AFRAME.registerComponent("listener", {
+    init: function() {
+      this.target = document.querySelector('#target');
+      this.prevPosition = null;
+      this.prevRotation = null;
+    },
+   tick: function() {
+     if (this.el.object3D.visible) {
+       this.target.setAttribute('visible', 'true')
+       if(this.prevPosition) {
+         this.target.object3D.position.lerp(this.prevPosition, 0.1)
+         let rot = this.target.object3D.rotation.toVector3().lerp(this.prevRotation, 0.1)
+         this.target.object3D.rotation.setFromVector3(rot)
+       } else {
+         this.target.setAttribute('position', this.el.getAttribute('position'))
+         this.target.setAttribute('rotation', this.el.getAttribute('rotation'))
+       }
+       this.prevPosition = this.el.object3D.position
+       this.prevRotation = this.el.object3D.rotation
+
+      } else {
+       this.target.setAttribute('visible', 'false')
+        this.prevPosition = null;
+        this.prevRotation = null;
+      }
+   }
+ })
+
+    </script>
+  </head>  
+  <body>
+	<a-scene embedded arjs='sourceType: webcam;'>
+
+    <a-assets>
+        <img id="map2" src="g7852-53.png">
+      </a-assets>
+
+    <a-marker id='marker' preset='kanji' listener>
+          <a-entity rotation="-90 0 0" position="0 1 0" scale="1 1 1">
+            <a-image src="#map2" rotation="" position="0 0 0" visible="" material="" geometry="" scale="1 1.45 1"></a-image>
+          </a-entity>
+
+    </a-marker>
+    		
+    <a-box id='target' material='opacity: 0.5;'></a-box>
+
+		<a-camera-static/>
+	</a-scene>
+
+  </body>
+</html>
