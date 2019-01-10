@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MZa!</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- AR.js by @jerome_etienne - github: https://github.com/jeromeetienne/ar.js - info: https://medium.com/arjs/augmented-reality-in-10-lines-of-html-4e193ea9fdbf -->
+    <script src="vendor_aframe_build_aframe.min.js"></script>
+    <script src="aframe_build_aframe-ar.js"></script>
+    <!-- import the webpage's javascript file -->
+<script>
+  AFRAME.registerComponent('registerevents', {
+    init: function () {
+      var marker = this.el;
+      console.log('INIT');
+
+      marker.addEventListener('markerFound', function() {
+        var markerId = marker.id;
+        console.log('markerFound', markerId);
+        // TODO: Add your own code here to react to the marker being found.
+      });
+
+      marker.addEventListener('markerLost', function() {
+        var markerId = marker.id;
+        console.log('markerLost', markerId);
+        // TODO: Add your own code here to react to the marker being lost.
+      });
+    }
+  });
+</script>
+  </head>  
+  <body>
+
+	<a-scene embedded arjs='sourceType: webcam; debugUIEnabled:false;  detectionMode: mono_and_matrix;'>
+
+    <a-assets>
+        <img id="map2" src="mob-ciclo-vida04.png">
+      </a-assets>
+
+    <a-marker id='marker' preset='kanji' registerevents>
+          
+          
+          <a-entity rotation="-90 0 0" position="0 1 0.2" scale="1.2 1.2 1.2">
+          <!-- <a-text value="A Roda da Vida" color="#FFF" visible="" text="" rotation="4 0 0" scale=".6 .6 .6" position="-.44 -.7 .3"></a-text> -->
+          <a-text side="double" negate="false" shader="sdf" value="A RODA DA VIDA" color="#ffcc00" visible="" text="" rotation="4 0 0" scale=".3 .3 .3" position="-.28 .7 .1" opacity=".8"></a-text>
+<!-- 
+          <a-text value="AMOR E RELACIONAMENTOS" color="#FFF" visible="" witdh="1" text="" rotation="0 0 0" scale="1 1 1" position="0 0 .05"></a-text> -->
+<!-- <a-entity
+  geometry="primitive: plane; width:.5; height: auto"
+  text="value: This text will be 4 units wide." position="0 0 .05"></a-entity> -->
+
+            <a-image src="#map2" rotation="" position="0 0 0" visible="" material="" geometry="" scale="1 1.45 1">
+              
+            </a-image>
+          </a-entity>
+
+    </a-marker>
+    		
+    <a-box id='target' material='opacity: 0.5;'></a-box>
+
+		<a-camera-static/>
+	</a-scene>
+
+    <div style="width:100%; height:10vh; position: fixed; bottom:0px; left:0; z-index:30; background:rgba(150,150,150,.9); text-align: center;">CONTROLS</div>
+  </body>
+</html>
