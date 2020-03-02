@@ -1,0 +1,103 @@
+<!doctype HTML>
+<html>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<script src="js/aframe.min.js"></script>
+<script src="js/aframe-ar.js"></script>
+<script src="js/aframe-extras.min.js"></script>
+<body style="margin: 0px; overflow: hidden;">
+<script>
+
+AFRAME.registerComponent('video-controls', {
+    
+    init: function()
+    {
+        let video = document.querySelector("#video");
+
+        let videoDisplay = document.querySelector("#video-display");
+        let videoBorder  = document.querySelector("#video-border");
+        let videoMesh  = videoDisplay.getObject3D("mesh");
+        let borderMesh = videoBorder.getObject3D("mesh");
+        
+        videoBorder.addEventListener("mousedown", function(event)
+        {
+            console.log('a');
+            if ( video.paused )
+            {
+            console.log('b');
+                video.play();
+                borderMesh.material.color.set("#004400");
+            }
+            else
+            {
+            console.log('c');
+                video.pause();
+                borderMesh.material.color.set("#440000");
+            }
+        });
+    }
+    
+});
+
+</script>
+
+
+<a-scene embedded vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false;">
+
+    <a-assets timeout="10000">
+        <canvas id="myCanvas"></canvas>
+        <img id="celepar" src="celepar01.png">
+        
+        <video id="video" loop="true" src="somos-celepar.mp4" autoplay></video>
+	</a-assets>
+    
+
+    <a-marker type="pattern" url="data/pattern-cel01.patt" rotation="60 0 0">
+        
+        <a-plane
+            width="10" height="10"
+            position=" 0.00 0.00 -.5" 
+            scale=".2 .2 .2" rotation="-90 0 0" 
+            color="#888888" 
+            material="src: #grid; repeat:100 100; transparent: true; opacity: 0.75"
+            shadow="cast: false; receive: true">
+        </a-plane>
+        
+        <a-plane
+            id = "video-border"
+            width = "3.6" height = "2.2"
+            position = "0 0 0"
+            color = "#333333"
+            rotation="-90 0 0"
+            video-controls>		
+            <a-video  
+                id = "video-display"
+                width="3.2" height="1.8" 
+                position="0 0 0.2"
+                src="#video">
+            </a-video>
+        </a-plane>
+   
+        <a-entity position="0 .4 0.9" scale=".3 .3 .3">
+			<a-cylinder color="#FFFFFF" height=".2" radius="1.2" segments-radial="360" position="0 0.2 .22" material="opacity: 0.94;"></a-cylinder>
+
+			<a-entity position="0 -.8 0">
+				<a-box position="0 1.21 0.19" width=".074" height=".864" rotation="0 90 90" color="#a1a19c"></a-box>
+				<!--<a-cylinder color="#820e64" height=".1" radius=".44" segments-radial="360" position="-0.5 2 0.2"></a-cylinder>-->
+				<a-cylinder color="#a1a19c" height=".12" radius=".44" segments-radial="360" position="-0.5 1.2 0.2"></a-cylinder>
+				<a-cylinder color="#a1a19c" height=".12" radius=".44" segments-radial="360" position="0.5 1.2 0.2"></a-cylinder>
+
+				<a-cylinder color="#650858" height=".13" radius=".44" segments-radial="360" position="-0.5 1.3 0.2"></a-cylinder>
+				<a-cylinder color="#ea5153" height=".13" radius=".44" segments-radial="360" position="0.5 1.3 0.2"></a-cylinder>
+			</a-entity>
+        </a-entity>
+        <!--<a-entity id="target" rotation="-90 0 0" position="0 -1.2 0" scale="1 1 1">
+            <a-image src="#celepar" rotation="0 0 0" position="0 0 2.2" visible="" material="" geometry="" scale="2.1 1 1">
+        </a-entity>-->
+    </a-marker>
+    
+    
+    <a-entity camera></a-entity>
+    
+</a-scene>
+</body>
+</html>

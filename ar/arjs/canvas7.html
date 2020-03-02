@@ -1,0 +1,50 @@
+<!doctype HTML>
+<html>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<script src="js/aframe.min.js"></script>
+<script src="js/aframe-ar.js"></script>
+<script>
+AFRAME.registerComponent("foo", {
+	init: function() {
+	let anim = document.getElementById("klop")
+
+	anim.addEventListener("click", (e) => {
+		console.log("hello")
+		this.el.emit("bar")
+		anim.emit("fallclick")
+	})
+
+	}
+})
+</script>
+<body style="margin: 0px; overflow: hidden;">
+
+<a-scene embedded vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false;">
+
+    <a-assets>
+	</a-assets>
+    
+    <a-marker type="pattern" url="data/pattern-cel01.patt" rotation="60 0 0">
+
+		<a-entity position="0 0 0">
+			<a-cylinder color="#FFFFFF" height=".2" radius="1.2" segments-radial="360" position="0 0.2 .22" material="opacity: 0.94;"></a-cylinder>
+
+			<a-entity position="0 -.8 0">
+				<a-box position="0 1.21 0.19" width=".074" height=".864" rotation="0 90 90" color="#a1a19c"></a-box>
+				<!--<a-cylinder color="#820e64" height=".1" radius=".44" segments-radial="360" position="-0.5 2 0.2"></a-cylinder>-->
+				<a-cylinder color="#a1a19c" height=".12" radius=".44" segments-radial="360" position="-0.5 1.2 0.2"></a-cylinder>
+				<a-cylinder color="#a1a19c" height=".12" radius=".44" segments-radial="360" position="0.5 1.2 0.2"></a-cylinder>
+
+				<a-cylinder id="klop" begin="bar" animation="startEvents: bar" color="#650858" height=".13" radius=".44" segments-radial="360" position="-0.5 1.35 0.2"></a-cylinder>
+				<a-cylinder color="#ea5153" height=".13" radius=".44" segments-radial="360" position="0.5 1.35 0.2"></a-cylinder>
+			</a-entity>
+        </a-entity>
+
+    </a-marker>
+    
+    
+    <a-entity camera></a-entity>
+    
+</a-scene>
+</body>
+</html>
