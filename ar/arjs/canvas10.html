@@ -1,0 +1,35 @@
+<!doctype HTML>
+<html>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<script src="js/aframe.min.js"></script>
+<script src="js/aframe-ar.js"></script>
+<body style="margin: 0px; overflow: hidden;">
+<style type="text/css">
+/*@keyframes pulse {70% {background-color:lighten(purple, 50);}}*/
+</style>
+<script>
+
+</script>
+
+
+<a-scene embedded vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false;">
+
+    <a-assets>
+        <img id="celepar" src="celepar01.png">
+		<a-asset-item id="celepar-obj" src="model/celepar/logo02.obj"></a-asset-item>
+		<a-asset-item id="celepar-mtl" src="model/celepar/logo02.mtl"></a-asset-item>
+	</a-assets>
+    
+
+    <a-marker type="pattern" url="data/pattern-cel01.patt" rotation="0 0 0">
+       
+        <a-obj-model src="#celepar-obj" mtl="#celepar-mtl" position="0 .2 0" rotation="-90 0 0" scale="0.05 0.05 0.05"></a-obj-model>
+
+    </a-marker>
+    
+    
+    <a-entity camera></a-entity>
+    
+</a-scene>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype HTML>
+<html>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<script src="js/aframe.min.js"></script>
+<script src="js/aframe-ar.js"></script>
+<body style="margin: 0px; overflow: hidden;">
+<style type="text/css">
+/*@keyframes pulse {70% {background-color:lighten(purple, 50);}}*/
+</style>
+<script>
+
+</script>
+
+
+<a-scene embedded vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false;">
+
+    <a-assets>
+        <canvas id="myCanvas"></canvas>
+        <img id="celepar" src="celepar01.png">
+		<a-asset-item id="celepar-obj" src="model/celepar/logo01.obj"></a-asset-item>
+		<a-asset-item id="celepar-mtl" src="model/celepar/logo01.mtl"></a-asset-item>
+	</a-assets>
+    
+
+    <a-marker type="pattern" url="data/pattern-cel01.patt" rotation="60 0 0">
+        <!--<a-box
+               position="0 0.5 0" 
+               material="src: #myCanvas; transparent: true;"
+               canvas-texture>
+        </a-box>
+        <a-entity id="cute-little-bot" visible="false" rotation="0 -90 0" side="double" position="0.0 0.2 0" scale="0.4 0.4 0.4" obj-model="obj: #cute-little-bot-obj; mtl: #cute-little-bot-mtl">
+        -->
+
+        <a-obj-model src="#celepar-obj" mtl="#celepar-mtl" position="0 .2 -1.12" rotation="90 0 360" scale="0.05 0.05 0.05"></a-obj-model>
+
+
+        <!--<a-entity id="target" rotation="-90 0 0" position="0 -1.2 0" scale="1 1 1">
+            <a-image src="#celepar" rotation="0 0 0" position="0 0 2.2" visible="" material="" geometry="" scale="2.1 1 1">
+        </a-entity>-->
+    </a-marker>
+    
+    
+    <a-entity camera></a-entity>
+    
+</a-scene>
+</body>
+</html>
